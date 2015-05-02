@@ -1,0 +1,87 @@
+/***********
+ CSS Styles
+ ***********/
+
+/* unvisited link */
+a:link {
+    color: #FB4500;
+} 
+
+/* visited link */
+a:visited {
+    color: #4B0082;
+} 
+
+/* mouse over link */
+a:hover {
+    color: orange;
+}
+
+/* selected link */
+a:active {
+    color: #0000FF;
+}
+
+audio {
+    align-content: center;
+}
+
+b {
+    text-align: center;
+    color: #4B0082;
+    font-size: 17px;
+    font-family: Times New Roman;
+}
+
+body {
+    background-color: #A9A9A9; 
+    background-image: url(http://www.neopointstore.com/wp-content/uploads/2014/04/light-grey-background-hd-hfvwvkq3.jpg);
+    background-attachment: fixed;
+}
+
+div > h3 > blockquote {
+    text-align: center;
+    color: #FB4500;
+    font-size:19px;
+    font-family: fantasy;
+}
+
+div > p {
+ font-size: 24px;
+ color: #4B0082;   
+}
+
+h1 {
+    color: #4B0082;
+    font-size: 30px;
+    font-family: britannic bold;
+    text-align: center;
+}
+
+h3 {
+    text-align: center;
+    color: #4B0082;
+    font-size: 13px;
+    font-family: verdana;
+}
+
+#contactInfo {
+    color: #FB4500;   
+}
+
+#postedBy {
+    color: #4B0082;   
+}
+
+#Schedule {
+    color: black;   
+}
+
+#sunsLogo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 300px;
+    height: 200px;
+}
+
