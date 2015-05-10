@@ -1,0 +1,14 @@
+/**********
+ CSS Styles
+ **********/
+ 
+body {
+    background-color: turquoise;   
+}
+ h1 {
+     color: red;
+ }
+
+label {
+    color: red   
+}
