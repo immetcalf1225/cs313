@@ -12,7 +12,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        Congratulations, you are now logged in!
-        <a href="ShowFeed">Click here to show your feed</a>
+        Congratulations, you are now logged in!<br>
+        <a href="PostToPage">Click here to post</a>
     </body>
 </html>

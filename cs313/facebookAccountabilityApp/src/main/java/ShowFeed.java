@@ -8,6 +8,8 @@
 
 import facebook4j.Facebook;
 import facebook4j.FacebookException;
+import facebook4j.Post;
+import facebook4j.ResponseList;
 import java.io.IOException;
 import java.io.PrintWriter;
 import static java.lang.System.out;
@@ -23,7 +25,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author isaacmetcalf
  */
-@WebServlet(name = "NewServlet", urlPatterns = {"/NewServlet"})
+@WebServlet(name = "ShowFeed", urlPatterns = {"/ShowFeed"})
 public class ShowFeed extends HttpServlet {
 
     /**
@@ -37,18 +39,24 @@ public class ShowFeed extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       Facebook facebook = (Facebook)request.getSession().getAttribute("facebook");
-       
-       PrintWriter writer = response.getWriter();
-       
+            Facebook facebook = (Facebook)request.getSession().getAttribute("facebook");
+            
         try {
-            out.println("Your name is" + facebook.getName());
+            ResponseList<Post> feed = facebook.getHome();
         } catch (FacebookException ex) {
             Logger.getLogger(ShowFeed.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalStateException ex) {
-            Logger.getLogger(ShowFeed.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
+
+            PrintWriter writer = response.getWriter();
+            
+            try {
+            out.println("Your name is" + facebook.getName());
+            } catch (FacebookException ex) {
+            Logger.getLogger(ShowFeed.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IllegalStateException ex) {
+            Logger.getLogger(ShowFeed.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
