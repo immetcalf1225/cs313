@@ -10,6 +10,7 @@ import facebook4j.Facebook;
 import facebook4j.FacebookException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -40,9 +41,17 @@ public class PostToPage extends HttpServlet {
         String message = "message testing";
         Facebook facebook = (Facebook) request.getSession().getAttribute("facebook");
         try {
-            facebook.postStatusMessage(message);
+            facebook.postStatusMessage(message); 
+            //NOTE: if there is an identical post already, it will throw the exception.
         } catch (FacebookException e) {
-            throw new ServletException(e);
+            Random random = new Random();
+            try {
+            facebook.postStatusMessage(message + random.nextInt());
+            } catch (Exception ex) {
+                throw new ServletException(e);
+            }
+            
+           
         }
         response.sendRedirect(request.getContextPath()+ "/");
 
