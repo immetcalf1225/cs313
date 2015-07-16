@@ -80,7 +80,7 @@
     </head>
     <body>
         <h1>Add a new goal:</h1>
-        <form name="goalForm" action="createGoal" method="POST" onSubmit="return validate()">
+        <form name="goalForm" action="CreateGoal" method="POST" onSubmit="return validate()">
             <p>
             <label for="name">Goal name:</label>
             <input type="text" name="name" id="name" placeholder="What should we call the goal?" />

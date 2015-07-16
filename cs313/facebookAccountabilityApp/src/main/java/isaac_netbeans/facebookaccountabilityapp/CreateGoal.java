@@ -5,6 +5,7 @@
  */
 package isaac_netbeans.facebookaccountabilityapp;
 
+import com.sun.media.jfxmedia.logging.Logger;
 import facebook4j.Facebook;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -39,8 +40,16 @@ public class CreateGoal extends HttpServlet {
         // and that the goal end time is after the current time.
         
         // get the variables
+        String userid = null;
+        try {
+            userid = facebook.getId();
+        } catch (Exception ex) {
+            Logger.logMsg(1, "Unable to access userid from Facebook session. Aborting goal creation.");
+        }
         
-        
+        if (userid == null) {
+            response.sendRedirect("./welcome.jsp");
+        }
         // validate said variables
         
         
