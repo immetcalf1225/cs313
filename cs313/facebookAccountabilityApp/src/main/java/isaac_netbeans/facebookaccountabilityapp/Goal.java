@@ -14,13 +14,13 @@ import java.util.Calendar;
 public class Goal {
     private String userid;
     private String name;
-    private String description;
+    private String failString;
     private Calendar calendar; // this holds both the date and the time at once
 
-    public Goal(String userid, String name, String description, Calendar endCalendar) {
+    public Goal(String userid, String name, String failString, Calendar endCalendar) {
         this.userid = userid;
         this.name = name;
-        this.description = description;
+        this.failString = failString;
         this.calendar = endCalendar;
     }
 
@@ -40,12 +40,12 @@ public class Goal {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
+    public String getFailString() {
+        return failString;
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        this.failString = description;
     }
 
     public Calendar getCalendar() {
