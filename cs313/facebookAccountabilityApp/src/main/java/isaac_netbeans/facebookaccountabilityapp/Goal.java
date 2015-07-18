@@ -16,12 +16,22 @@ public class Goal {
     private String name;
     private String failString;
     private Calendar calendar; // this holds both the date and the time at once
+    private int goalId;
 
-    public Goal(String userid, String name, String failString, Calendar endCalendar) {
+    public Goal(String userid, String name, String failString, Calendar endCalendar, int goalId) {
         this.userid = userid;
         this.name = name;
         this.failString = failString;
         this.calendar = endCalendar;
+        this.goalId = goalId;
+    }
+
+    public int getGoalId() {
+        return goalId;
+    }
+
+    public void setGoalId(int goalId) {
+        this.goalId = goalId;
     }
 
     public String getUserid() {
@@ -58,13 +68,32 @@ public class Goal {
 
     public String getDateString() {
         //TODO: implement
-        
         return null;
     }
     
     public String getTimeString() {
         // TODO: implement
         return null;
+    }
+    
+    public String getSQLDateString() {
+        // YYYY-MM-DD HH:MM:SS
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        int minute = calendar.get(Calendar.MINUTE);
+        
+        String yearS = ("0000" + year).substring(Integer.toString(year).length());
+        String monthS = ("00" + month).substring(Integer.toString(month).length());
+        String dayS = ("00" + day).substring(Integer.toString(day).length());
+        
+        String hourS = ("00" + hour).substring(Integer.toString(hour).length());
+        String minuteS = ("00" + minute).substring(Integer.toString(minute).length());
+        String secondS = "00";
+        
+        return yearS + "-" + monthS + "-" + dayS + " " + hourS + ":" + minuteS + ":" + secondS;
+        
     }
     
     
