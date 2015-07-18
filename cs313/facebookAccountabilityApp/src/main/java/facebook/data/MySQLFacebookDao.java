@@ -6,6 +6,7 @@
 package facebook.data;
 
 import facebook.bll.Thegoal;
+import isaac_netbeans.facebookaccountabilityapp.Goal;
 import java.util.Date;
 import java.util.List;
 
@@ -16,8 +17,15 @@ import java.util.List;
 public class MySQLFacebookDao implements FacebookDao{
 
     @Override
-    public boolean addGoal(int goal_id, String goal_name, String goal_desc, Date goal_start, Date goal_fin, int user_id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean addGoal(Goal goal) {
+        
+        // make the query from the goal stuff
+        
+        // actually do above query
+        
+        // do a dance
+        
+        return false;
     }
 
     @Override
