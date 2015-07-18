@@ -45,7 +45,7 @@
                 var form = document.forms["goalForm"];
 
                 var name = form["name"].value;
-                var description = form["description"].value;
+                var failure = form["failure"].value;
                 var endTime = form["endTime"].value;
                 var endDate = form["endDate"].value;
 
@@ -58,8 +58,8 @@
                 }
 
                 // make sure the description is filled in
-                if (description === "") {
-                    form["description"].focus();
+                if (failure === "") {
+                    form["failure"].focus();
                     return false;
                 }
 
@@ -99,31 +99,36 @@
                 return true;
             }
         </script>
-
+        
+        <style>
+            #labels { width: 175px;}
+        </style>
 
     </head>
     <body>
+        <div class="container">
         <h1>Add a new goal:</h1>
         <form name="goalForm" action="CreateGoal" method="POST" onSubmit="return validate()">
-            <p>
-                <label for="name">Goal name:</label>
-                <input type="text" name="name" id="name" placeholder="What should we call the goal?" />
-            </p>
+            <div class="input-group col-xs-6">
+                <span id="labels" class="input-group-addon">Goal Name:</span>
+                <input class="form-control" type="text" name="name" id="name" placeholder="What should we call the goal?" />
+            </div>
 
-            <p>
-                <label for="description">Goal Description:</label>
-                <input type="text" name="description" id="description" placeholder="How will you define success?" />
-            </p>
+            <div class="input-group col-xs-6">
+                <span id="labels" class="input-group-addon">Goal Failure Message:</span>
+                <input class="form-control" type="text" name="failure" id="failure" placeholder="What message will be posted?" />
+            </div>
 
-            <p>
-                <label for="endTime">Goal Ending Time:</label>
-                <input type="time" name="endTime" id="endTime" />
-            </p>
+            <div class="input-group col-xs-4">
+                <span id="labels" class="input-group-addon">Goal Ending Time:</span>
+                <input class="form-control" type="time" name="endTime" id="endTime" />
+            </div>
 
-            <p>
-                <label for="endDate">Goal Ending Date:</label>
-                <input type="date" name="endDate" id="endDate" />
-            </p>
+            <div class="input-group col-xs-4">
+                <!-- <label for="endDate">Goal Ending Date:</label>-->
+                <span id="labels" class="input-group-addon" >Goal Ending Date:</span>
+                <input class="form-control" type="date" name="endDate" id="endDate" />
+            </div>
 
             <p>
                 <div class="container">
@@ -131,7 +136,7 @@
                 </div>
             </p>
         </form>
-
+        </div>
 
 
     </body>
