@@ -55,7 +55,25 @@ public class MySQLFacebookDao implements FacebookDao{
 
     @Override
     public boolean removeGoal(int goal_id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            
+            String user = "adam";    
+            String pass = "eve!";
+            String dbURL = "jdbc:mysql://localhost/goal";
+            Connection conn = DriverManager.getConnection(dbURL, user, pass);
+            
+            Statement statement = conn.createStatement();
+            
+            String sql = "DELETE FROM goal WHERE goal_id = "+goal_id;
+            ResultSet rs = statement.executeQuery(sql);
+            rs.close();
+            conn.close();
+            return true;
+        } catch (Exception ex) {
+            
+        }
+        return false;
     }
 
 }
