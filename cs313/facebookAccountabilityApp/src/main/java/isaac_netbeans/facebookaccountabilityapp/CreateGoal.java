@@ -42,6 +42,10 @@ public class CreateGoal extends HttpServlet {
         // make sure to validate it one more time to ensure all of it is there
         // and that the goal end time is after the current time.
         
+        if (facebook == null) {
+            response.sendRedirect("./welcome.jsp");
+        }
+                
         // get the variables
         String userid = null;
         try {
@@ -60,7 +64,7 @@ public class CreateGoal extends HttpServlet {
         String endTime = request.getParameter("endTime");
         String name = request.getParameter("name");
         String failure = request.getParameter("failure");
-        
+                
         // redirect if anything is missing
         if (name == null || failure == null || endDate == null || endTime == null) {
             response.sendRedirect("./welcome.jsp");
@@ -68,7 +72,7 @@ public class CreateGoal extends HttpServlet {
         
         // format the datetime
         int year = Integer.parseInt(endDate.substring(0,4));
-        int month = Integer.parseInt(endDate.substring(5,7)) - 1;
+        int month = Integer.parseInt(endDate.substring(5,7));
         int day = Integer.parseInt(endDate.substring(8,10));
         int hour = Integer.parseInt(endTime.substring(0,2));
         int minute = Integer.parseInt(endTime.substring(3,5));
