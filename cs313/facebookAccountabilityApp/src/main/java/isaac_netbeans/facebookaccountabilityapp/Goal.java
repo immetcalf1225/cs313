@@ -105,7 +105,15 @@ public class Goal {
     }
     
     public void setDateFromSQL(String datetime) {
+        // YYYY-MM-DD HH:MM:SS
         
+        int year = Integer.parseInt(datetime.substring(0,4));
+        int month = Integer.parseInt(datetime.substring(5,7));
+        int day = Integer.parseInt(datetime.substring(8,10));
+        int hour = Integer.parseInt(datetime.substring(11,13));
+        int minute = Integer.parseInt(datetime.substring(14,16));
+        
+        calendar.set(year, month, day, hour, minute);
     }
     
     
