@@ -26,6 +26,14 @@ public class Goal {
         this.goalId = goalId;
     }
 
+    public Goal() {
+        this.userid = "";
+        this.name = "";
+        this.failString = "";
+        this.calendar = Calendar.getInstance();
+        this.goalId = -1;
+    }
+
     public int getGoalId() {
         return goalId;
     }
@@ -96,6 +104,9 @@ public class Goal {
         
     }
     
+    public void setDateFromSQL(String datetime) {
+        
+    }
     
     
 }
