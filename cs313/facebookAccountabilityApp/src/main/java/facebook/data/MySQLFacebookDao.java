@@ -67,7 +67,7 @@ public class MySQLFacebookDao implements FacebookDao{
             
             Statement statement = conn.createStatement();
             
-            String sql = "SELECT goal_name, goal_fin, goal_fail FROM goal WHERE user_id = " + user_id;
+            String sql = "SELECT goal_name, goal_fin, goal_fail, goal_id FROM goal WHERE user_id = " + user_id;
             
             ResultSet results = statement.executeQuery(sql);
             
@@ -90,6 +90,7 @@ public class MySQLFacebookDao implements FacebookDao{
             return goals;
         } catch (Exception ex) {
             
+            ex.printStackTrace();
         }
         return goals;
     }
