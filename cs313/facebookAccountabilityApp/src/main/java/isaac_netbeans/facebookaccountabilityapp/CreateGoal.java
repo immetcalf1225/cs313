@@ -83,7 +83,9 @@ public class CreateGoal extends HttpServlet {
         
         // Send the goal object to the database class
         new MySQLFacebookDao().addGoal(goal);
-                
+        
+        
+        response.sendRedirect("./welcome.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
