@@ -35,15 +35,19 @@ public class MySQLFacebookDao implements FacebookDao{
             
             Statement statement = conn.createStatement();
             
-            String sql = "INSERT INTO `goal`(`goal_name`, `goal_fin`, `goal_fail`, `user_id`) VALUES ("
-                    +goal.getName()+","+goal.getSQLDateString()+","
-                    +goal.getFailString()+","+goal.getUserid()+")";
-            ResultSet rs = statement.executeQuery(sql);
-            rs.close();
+            String sql = "INSERT INTO `goal`(`goal_name`, `goal_fin`, `goal_fail`, `user_id`) VALUES (\""
+                    +goal.getName()+"\", \""+goal.getSQLDateString()+"\", \""
+                    +goal.getFailString()+"\", \""+goal.getUserid()+"\");";
+            
+            System.out.println(sql);
+            
+            statement.executeUpdate(sql);
+            
             conn.close();
             return true;
         } catch (Exception ex) {
-            
+            System.out.println("crash :(");
+            ex.printStackTrace();
         }
         
         return false;
