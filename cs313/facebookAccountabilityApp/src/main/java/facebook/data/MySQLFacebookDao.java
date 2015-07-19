@@ -67,17 +67,21 @@ public class MySQLFacebookDao implements FacebookDao{
             
             Statement statement = conn.createStatement();
             
-            String sql = "SELECT goal_name, goal_fin FROM goal WHERE user_id = " + user_id;
+            String sql = "SELECT goal_name, goal_fin, goal_fail FROM goal WHERE user_id = " + user_id;
             
             ResultSet results = statement.executeQuery(sql);
             
             while(results.next()){
+                int id = results.getInt("goal_id");
                 String name = results.getString("goal_name");
                 String fin = results.getString("goal_fin");
+                String fail = results.getString("goal_fail");
                 
                 Goal goal = new Goal();
+                goal.setGoalId(id);
                 goal.setDateFromSQL(fin);
                 goal.setName(name);
+                goal.setFailString(fail);
                 goals.add(goal);
             }
             
@@ -94,7 +98,7 @@ public class MySQLFacebookDao implements FacebookDao{
     public boolean removeGoal(int goal_id) {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            
+            System.out.println("are we there yet?");
             String user = "adam";    
             String pass = "eve!";
             String dbURL = "jdbc:mysql://localhost/goal";
@@ -102,13 +106,15 @@ public class MySQLFacebookDao implements FacebookDao{
             
             Statement statement = conn.createStatement();
             
-            String sql = "DELETE FROM goal WHERE goal_id = "+goal_id;
-            ResultSet rs = statement.executeQuery(sql);
-            rs.close();
+            String sql = "DELETE FROM goal WHERE goal_id = " + goal_id;
+            System.out.println(sql);
+            statement.executeUpdate(sql);
+            
             conn.close();
             return true;
         } catch (Exception ex) {
-            
+            System.out.println("It crashed :(");
+            ex.printStackTrace();
         }
         return false;
     }

@@ -4,6 +4,14 @@
     Author     : isaacmetcalf
 --%>
 
+<%@page import="java.util.Date"%>
+<%@page import="facebook4j.FacebookException"%>
+<%@page import="facebook.data.FacebookDao"%>
+<%@page import="java.util.Calendar"%>
+<%@page import="facebook.data.MySQLFacebookDao"%>
+<%@page import="facebook4j.Facebook"%>
+<%@page import="isaac_netbeans.facebookaccountabilityapp.Goal"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -37,7 +45,48 @@
             </div>
         </form>
 
-
-        <p>Unfinished goals will eventually be listed here</p>
+        <!-- list posts -->
+        <%
+            Facebook facebook = (Facebook) request.getSession().getAttribute("facebook");
+            String userid = null;
+            try {
+                // get the user id
+                userid = facebook.getId();
+                
+                // get the list of goals for the user
+                FacebookDao dao = new MySQLFacebookDao();
+                
+                List<Goal> goals = dao.getAllGoal(userid);
+                
+                // check to see if any are overdue
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(new Date());
+                
+                for (Goal goal : goals) {
+                    System.out.println("you've got a goal");
+                    Calendar cal = goal.getCalendar();
+                    if (calendar.compareTo(cal) < 0) {
+                        System.out.println("You have a failed goal");
+                        try {
+                            System.out.println("Failed goal text: " + goal.getFailString());
+                            facebook.postStatusMessage(goal.getFailString()); 
+                            //NOTE: if there is an identical post already, it will throw the exception.
+                        } catch (FacebookException e) {
+                            // you crashed when posting to facebook :(
+                            e.printStackTrace();
+                        }
+                        dao.removeGoal(goal.getGoalId());
+                    }
+                }
+                
+                
+                
+                
+            } catch (Exception ex) {
+                
+            }
+            
+        %>
+        
     </body>
 </html>

@@ -62,8 +62,8 @@ public class Goal {
         return failString;
     }
 
-    public void setDescription(String description) {
-        this.failString = description;
+    public void setFailString(String failString) {
+        this.failString = failString;
     }
 
     public Calendar getCalendar() {
