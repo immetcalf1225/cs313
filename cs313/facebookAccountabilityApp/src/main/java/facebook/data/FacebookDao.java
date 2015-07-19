@@ -5,7 +5,6 @@
  */
 package facebook.data;
 
-import facebook.bll.Thegoal;
 import isaac_netbeans.facebookaccountabilityapp.Goal;
 import java.util.Date;
 import java.util.List;
@@ -19,8 +18,8 @@ public interface FacebookDao {
      boolean addGoal(Goal goal);
 
     //read
-    List<Thegoal> getAllGoal();
+    List<Goal> getAllGoal();
 
     //delete
-    boolean removeGoal(Thegoal goal);
+    boolean removeGoal(int goal_id);
 }
