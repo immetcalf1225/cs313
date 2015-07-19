@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -49,8 +50,40 @@ public class MySQLFacebookDao implements FacebookDao{
     }
 
     @Override
-    public List<Goal> getAllGoal() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Goal> getAllGoal(String user_id) {
+        List<Goal> goals = new ArrayList<Goal>();
+        
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            
+            String user = "adam";    
+            String pass = "eve!";
+            String dbURL = "jdbc:mysql://localhost/goal";
+            Connection conn = DriverManager.getConnection(dbURL, user, pass);
+            
+            Statement statement = conn.createStatement();
+            
+            String sql = "SELECT goal_name, goal_fin FROM goal WHERE user_id = " + user_id;
+            
+            ResultSet results = statement.executeQuery(sql);
+            
+            while(results.next()){
+                String name = results.getString("goal_name");
+                String fin = results.getString("goal_fin");
+                
+                Goal goal = new Goal();
+                goal.setDateFromSQL(fin);
+                goal.setName(name);
+                goals.add(goal);
+            }
+            
+            results.close();
+            conn.close();
+            return goals;
+        } catch (Exception ex) {
+            
+        }
+        return goals;
     }
 
     @Override
