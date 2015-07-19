@@ -17,7 +17,7 @@ public interface FacebookDao {
      boolean addGoal(Goal goal);
 
     //read
-    List<Goal> getAllGoal();
+    List<Goal> getAllGoal(String user_id);
 
     //delete
     boolean removeGoal(int goal_id);
