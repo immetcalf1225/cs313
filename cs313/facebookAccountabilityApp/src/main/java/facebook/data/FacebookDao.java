@@ -6,7 +6,6 @@
 package facebook.data;
 
 import isaac_netbeans.facebookaccountabilityapp.Goal;
-import java.util.Date;
 import java.util.List;
 
 /**
