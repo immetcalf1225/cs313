@@ -4,6 +4,7 @@
     Author     : isaacmetcalf
 --%>
 
+<%@page import="java.util.Collections"%>
 <%@page import="java.util.Date"%>
 <%@page import="facebook4j.FacebookException"%>
 <%@page import="facebook.data.FacebookDao"%>
@@ -28,6 +29,18 @@
         
         <link rel="stylesheet" type="text/css" href="AccountabilityApp.css">
         <link href='http://fonts.googleapis.com/css?family=Cabin' rel='stylesheet' type='text/css'>
+        
+        <script>
+            function deleteGoal(goalId) {
+                
+                window.location='./DeleteGoal?goalid=' + goalId;
+                
+            }
+            
+            
+        </script>
+        
+        
         <title>Welcome</title>
     </head>
     <body>
@@ -59,13 +72,19 @@
                 List<Goal> goals = dao.getAllGoal(userid);
                 
                 // check to see if any are overdue
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(new Date());
+                //Calendar calendar = Calendar.getInstance();
+                //calendar.setTime(new Date());
+                Date now = new Date();
+                
+                //System.out.println(calendar.toString());
                 
                 for (Goal goal : goals) {
                     System.out.println("you've got a goal");
-                    Calendar cal = goal.getCalendar();
-                    if (calendar.compareTo(cal) < 0) {
+                    System.out.println(goal.getDateAsDate());
+                    //Calendar cal = goal.getCalendar();
+                    //System.out.println(cal.getTime().toString() + " vs " + calendar.getTime().toString());
+                    //if (calendar.compareTo(cal) >= 0) {
+                    if (now.compareTo(goal.getDateAsDate()) >= 0) {
                         System.out.println("You have a failed goal");
                         try {
                             System.out.println("Failed goal text: " + goal.getFailString());
@@ -78,6 +97,21 @@
                         dao.removeGoal(goal.getGoalId());
                     }
                 }
+                
+                goals = dao.getAllGoal(userid);
+                
+                for (Goal goal : goals) {
+                %>    
+                <div class="list-group">
+                    <div class="list-group-item">
+                        <%= goal.getName() %> <br />
+                        Due <%= goal.getDateString() %> <br />
+                        <a class="btn btn-lg btn-success" onclick="deleteGoal( <%= goal.getGoalId() %>)">Goal Complete!</a>
+                    </div>
+                </div>
+                <%
+                }
+                
                 
                 
                 

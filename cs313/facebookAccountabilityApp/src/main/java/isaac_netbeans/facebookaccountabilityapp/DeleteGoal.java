@@ -34,11 +34,12 @@ public class DeleteGoal extends HttpServlet {
             throws ServletException, IOException {
         
         
-        if (request.getParameter("goalId") == null) {
+        
+        if (request.getParameter("goalid") == null) {
             response.sendRedirect("./welcome.jsp");
         }
         
-        int goalId = Integer.parseInt(request.getParameter("goalId"));
+        int goalId = Integer.parseInt(request.getParameter("goalid"));
         
         new MySQLFacebookDao().removeGoal(goalId);
         

@@ -6,6 +6,7 @@
 package isaac_netbeans.facebookaccountabilityapp;
 
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  *
@@ -75,13 +76,21 @@ public class Goal {
     }
 
     public String getDateString() {
-        //TODO: implement
-        return null;
-    }
-    
-    public String getTimeString() {
-        // TODO: implement
-        return null;
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH) + 1;
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        int minute = calendar.get(Calendar.MINUTE);
+        
+        String yearS = ("0000" + year).substring(Integer.toString(year).length());
+        String monthS = ("00" + month).substring(Integer.toString(month).length());
+        String dayS = ("00" + day).substring(Integer.toString(day).length());
+        
+        String hourS = ("00" + hour).substring(Integer.toString(hour).length());
+        String minuteS = ("00" + minute).substring(Integer.toString(minute).length());
+        String secondS = "00";
+        
+        return yearS + "-" + monthS + "-" + dayS + " " + hourS + ":" + minuteS + ":" + secondS;
     }
     
     public String getSQLDateString() {
@@ -113,8 +122,11 @@ public class Goal {
         int hour = Integer.parseInt(datetime.substring(11,13));
         int minute = Integer.parseInt(datetime.substring(14,16));
         
-        calendar.set(year, month, day, hour, minute);
+        calendar.set(year, month, day, hour, minute, 0);
     }
     
+    public Date getDateAsDate() {
+        return calendar.getTime();
+    }
     
 }

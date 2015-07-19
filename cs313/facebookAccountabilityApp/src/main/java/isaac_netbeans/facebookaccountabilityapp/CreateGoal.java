@@ -72,14 +72,14 @@ public class CreateGoal extends HttpServlet {
         
         // format the datetime
         int year = Integer.parseInt(endDate.substring(0,4));
-        int month = Integer.parseInt(endDate.substring(5,7));
+        int month = Integer.parseInt(endDate.substring(5,7)) - 1;
         int day = Integer.parseInt(endDate.substring(8,10));
         int hour = Integer.parseInt(endTime.substring(0,2));
         int minute = Integer.parseInt(endTime.substring(3,5));
         
         Calendar calendar = Calendar.getInstance();
         
-        calendar.set(year, month, day, hour, minute);
+        calendar.set(year, month, day, hour, minute, 0);
         
         
         // compile the data into a goal object
