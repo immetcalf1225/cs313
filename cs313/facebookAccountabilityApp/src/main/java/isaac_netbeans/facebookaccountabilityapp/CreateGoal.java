@@ -6,9 +6,12 @@
 package isaac_netbeans.facebookaccountabilityapp;
 
 import com.sun.media.jfxmedia.logging.Logger;
+import facebook.data.FacebookDao;
+import facebook.data.MySQLFacebookDao;
 import facebook4j.Facebook;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Calendar;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -51,13 +54,36 @@ public class CreateGoal extends HttpServlet {
             response.sendRedirect("./welcome.jsp");
         }
         // validate said variables
+        // endDate, endTime, name, failure
+        
+        String endDate = request.getParameter("endDate");
+        String endTime = request.getParameter("endTime");
+        String name = request.getParameter("name");
+        String failure = request.getParameter("failure");
+        
+        // redirect if anything is missing
+        if (name == null || failure == null || endDate == null || endTime == null) {
+            response.sendRedirect("./welcome.jsp");
+        }
+        
+        // format the datetime
+        int year = Integer.parseInt(endDate.substring(0,4));
+        int month = Integer.parseInt(endDate.substring(5,7)) - 1;
+        int day = Integer.parseInt(endDate.substring(8,10));
+        int hour = Integer.parseInt(endTime.substring(0,2));
+        int minute = Integer.parseInt(endTime.substring(3,5));
+        
+        Calendar calendar = Calendar.getInstance();
+        
+        calendar.set(year, month, day, hour, minute);
         
         
         // compile the data into a goal object
-        
+        Goal goal = new Goal(userid, name, failure, calendar, 0);
         
         // Send the goal object to the database class
-        
+        new MySQLFacebookDao().addGoal(goal);
+                
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
